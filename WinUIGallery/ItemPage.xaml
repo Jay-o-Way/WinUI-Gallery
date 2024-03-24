@@ -31,34 +31,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="NormalFrameContent" />
-                <VisualState x:Name="WideFrameContent">
-                    <VisualState.Setters>
-                        <Setter Target="contentFrame.Width" Value="1028" />
-                        <Setter Target="contentFrame.HorizontalAlignment" Value="Left" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-            <VisualStateGroup x:Name="LayoutVisualStates">
-                <VisualState x:Name="WideLayout">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource Breakpoint640Plus}" />
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="NarrowLayout">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="pageHeader.Padding" Value="16,48,16,0" />
-                        <Setter Target="contentRoot.Padding" Value="16,0,16,16" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
         <controls:PageHeader x:Name="pageHeader" Item="{x:Bind Item}" />
 
         <!--  Content Region  -->
@@ -86,5 +58,32 @@
                 <Frame x:Name="contentFrame" Grid.Row="1" />
             </Grid>
         </ScrollViewer>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="NormalFrameContent" />
+                <VisualState x:Name="WideFrameContent">
+                    <VisualState.Setters>
+                        <Setter Target="contentFrame.Width" Value="1028" />
+                        <Setter Target="contentFrame.HorizontalAlignment" Value="Left" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="LayoutVisualStates">
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource Breakpoint640Plus}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="contentRoot.Padding" Value="16,0,16,16" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
