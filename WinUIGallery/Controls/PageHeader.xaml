@@ -18,200 +18,195 @@
             NotEmptyValue="Visible" />
     </UserControl.Resources>
 
-    <CommandBar
-        x:Name="headerGrid"
-        Background="Transparent"
-        DefaultLabelPosition="Right">
-        <CommandBar.Content>
-            <StackPanel
-                x:Name="TitleAndNameSpace"
-                Margin="32,12,32,0"
-                Orientation="Vertical">
-                <TextBlock
-                    AutomationProperties.AutomationId="PageHeader"
-                    Style="{StaticResource TitleTextBlockStyle}"
-                    Text="{x:Bind Item.Title}"
-                    TextTrimming="CharacterEllipsis"
-                    TextWrapping="NoWrap" />
-                <TextBlock
-                    x:Name="NamespaceTextBlock"
-                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                    IsTextSelectionEnabled="True"
-                    Style="{StaticResource CaptionTextBlockStyle}"
-                    Text="{x:Bind Item.ApiNamespace}"
-                    Visibility="{x:Bind Item.ApiNamespace, Converter={StaticResource emptyStringToVisibilityConverter}}" />
-            </StackPanel>
-        </CommandBar.Content>
-        <AppBarElementContainer>
-            <DropDownButton Content="Documentation" Visibility="{x:Bind Item.Docs, Converter={StaticResource collectionConverter}}">
-                <DropDownButton.Resources>
-                    <!--
-                        Override default brushes to make the DropDownButton
-                        match other command bar elements.
-                    -->
-                    <Style TargetType="DropDownButton">
-                        <Setter Property="Height" Value="38" />
-                        <Setter Property="Margin" Value="0,4" />
-                    </Style>
-                    <SolidColorBrush x:Key="DropDownButtonBackground" Color="Transparent" />
-                    <SolidColorBrush x:Key="DropDownButtonBackgroundPressed" Color="{ThemeResource SystemListMediumColor}" />
-                    <SolidColorBrush x:Key="DropDownButtonBackgroundPointerOver" Color="{ThemeResource SystemListLowColor}" />
-                    <SolidColorBrush x:Key="DropDownButtonBorderBrush" Color="Transparent" />
-                    <SolidColorBrush x:Key="DropDownButtonBorderBrushPointerOver" Color="Transparent" />
-                    <SolidColorBrush x:Key="DropDownButtonBorderBrushChecked" Color="Transparent" />
-                </DropDownButton.Resources>
-                <DropDownButton.Flyout>
-                    <Flyout Placement="Bottom">
-                        <ItemsControl
-                            x:Name="DocsList"
-                            IsTabStop="False"
-                            ItemsSource="{x:Bind Item.Docs}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Vertical" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate x:DataType="data:ControlInfoDocLink">
-                                    <HyperlinkButton NavigateUri="{Binding Uri}" ToolTipService.ToolTip="{Binding Uri}">
-                                        <TextBlock Text="{x:Bind Title}" />
-                                    </HyperlinkButton>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Flyout>
-                </DropDownButton.Flyout>
-            </DropDownButton>
-        </AppBarElementContainer>
+    <StackPanel Orientation="Vertical">
+        <CommandBar
+            x:Name="headerGrid"
+            Background="Transparent"
+            DefaultLabelPosition="Right">
+            <AppBarElementContainer>
+                <DropDownButton Content="Documentation" Visibility="{x:Bind Item.Docs, Converter={StaticResource collectionConverter}}">
+                    <DropDownButton.Resources>
+                        <!--
+                            Override default brushes to make the DropDownButton
+                            match other command bar elements.
+                        -->
+                        <Style TargetType="DropDownButton">
+                            <Setter Property="Height" Value="38" />
+                            <Setter Property="Margin" Value="0,4" />
+                        </Style>
+                        <SolidColorBrush x:Key="DropDownButtonBackground" Color="Transparent" />
+                        <SolidColorBrush x:Key="DropDownButtonBackgroundPressed" Color="{ThemeResource SystemListMediumColor}" />
+                        <SolidColorBrush x:Key="DropDownButtonBackgroundPointerOver" Color="{ThemeResource SystemListLowColor}" />
+                        <SolidColorBrush x:Key="DropDownButtonBorderBrush" Color="Transparent" />
+                        <SolidColorBrush x:Key="DropDownButtonBorderBrushPointerOver" Color="Transparent" />
+                        <SolidColorBrush x:Key="DropDownButtonBorderBrushChecked" Color="Transparent" />
+                    </DropDownButton.Resources>
+                    <DropDownButton.Flyout>
+                        <Flyout Placement="Bottom">
+                            <ItemsControl
+                                x:Name="DocsList"
+                                IsTabStop="False"
+                                ItemsSource="{x:Bind Item.Docs}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="data:ControlInfoDocLink">
+                                        <HyperlinkButton
+                                            Content="{x:Bind Title}"
+                                            NavigateUri="{Binding Uri}"
+                                            ToolTipService.ToolTip="{Binding Uri}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Flyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+            </AppBarElementContainer>
 
-        <AppBarElementContainer>
-            <DropDownButton Content="Source" ToolTipService.ToolTip="Source code of this sample page">
-                <!--<DropDownButton.Icon>
+            <AppBarElementContainer>
+                <DropDownButton Content="Source" ToolTipService.ToolTip="Source code of this sample page">
+                    <!--<DropDownButton.Icon>
                     <PathIcon Data="{StaticResource GitHubIconPath}" />
                 </DropDownButton.Icon>-->
-                <DropDownButton.Resources>
-                    <!--
-                        Override default brushes to make the DropDownButton
-                        match other command bar elements.
-                    -->
-                    <Style TargetType="DropDownButton">
-                        <Setter Property="Height" Value="38" />
-                        <Setter Property="Margin" Value="0,4" />
-                    </Style>
-                    <SolidColorBrush x:Key="DropDownButtonBackground" Color="Transparent" />
-                    <SolidColorBrush x:Key="DropDownButtonBackgroundPressed" Color="{ThemeResource SystemListMediumColor}" />
-                    <SolidColorBrush x:Key="DropDownButtonBackgroundPointerOver" Color="{ThemeResource SystemListLowColor}" />
-                    <SolidColorBrush x:Key="DropDownButtonBorderBrush" Color="Transparent" />
-                    <SolidColorBrush x:Key="DropDownButtonBorderBrushPointerOver" Color="Transparent" />
-                    <SolidColorBrush x:Key="DropDownButtonBorderBrushChecked" Color="Transparent" />
-                </DropDownButton.Resources>
-                <DropDownButton.Flyout>
-                    <Flyout Placement="Bottom">
-                        <StackPanel x:Name="SourcePanel">
-                            <StackPanel x:Name="ControlSourcePanel" Margin="0,0,0,12">
+                    <DropDownButton.Resources>
+                        <!--
+                            Override default brushes to make the DropDownButton
+                            match other command bar elements.
+                        -->
+                        <Style TargetType="DropDownButton">
+                            <Setter Property="Height" Value="38" />
+                            <Setter Property="Margin" Value="0,4" />
+                        </Style>
+                        <SolidColorBrush x:Key="DropDownButtonBackground" Color="Transparent" />
+                        <SolidColorBrush x:Key="DropDownButtonBackgroundPressed" Color="{ThemeResource SystemListMediumColor}" />
+                        <SolidColorBrush x:Key="DropDownButtonBackgroundPointerOver" Color="{ThemeResource SystemListLowColor}" />
+                        <SolidColorBrush x:Key="DropDownButtonBorderBrush" Color="Transparent" />
+                        <SolidColorBrush x:Key="DropDownButtonBorderBrushPointerOver" Color="Transparent" />
+                        <SolidColorBrush x:Key="DropDownButtonBorderBrushChecked" Color="Transparent" />
+                    </DropDownButton.Resources>
+                    <DropDownButton.Flyout>
+                        <Flyout Placement="Bottom">
+                            <StackPanel x:Name="SourcePanel">
+                                <StackPanel x:Name="ControlSourcePanel" Margin="0,0,0,8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                            Style="{StaticResource CaptionTextBlockStyle}"
+                                            Text="Control source code" />
+                                        <FontIcon
+                                            VerticalAlignment="Center"
+                                            FontSize="16"
+                                            Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                                            Glyph="&#xE946;"
+                                            ToolTipService.ToolTip="Source code of this control in the WinUI repository. For some controls only the XAML file is available" />
+                                    </StackPanel>
+                                    <HyperlinkButton
+                                        x:Name="ControlSourceLink"
+                                        Content="{x:Bind Item.Title}"
+                                        ToolTipService.ToolTip="{x:Bind ControlSourceLink.NavigateUri, Mode=OneWay}" />
+                                </StackPanel>
+
                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                     <TextBlock
                                         VerticalAlignment="Center"
                                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                         Style="{StaticResource CaptionTextBlockStyle}"
-                                        Text="Control source code" />
+                                        Text="Sample page source code" />
                                     <FontIcon
                                         VerticalAlignment="Center"
                                         FontSize="16"
                                         Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
                                         Glyph="&#xE946;"
-                                        ToolTipService.ToolTip="Source code of this control in the WinUI repository. For some controls only the XAML file is available" />
+                                        ToolTipService.ToolTip="Source code of this sample page in the WinUI Gallery repository" />
                                 </StackPanel>
                                 <HyperlinkButton
-                                    x:Name="ControlSourceLink"
-                                    Margin="-12,4,0,0"
-                                    ToolTipService.ToolTip="{x:Bind ControlSourceLink.NavigateUri, Mode=OneWay}">
-                                    <TextBlock Text="{x:Bind Item.Title}" />
-                                </HyperlinkButton>
+                                    x:Name="PageMarkupGitHubLink"
+                                    Content="XAML"
+                                    ToolTipService.ToolTip="{x:Bind PageMarkupGitHubLink.NavigateUri, Mode=OneWay}" />
+                                <HyperlinkButton
+                                    x:Name="PageCodeGitHubLink"
+                                    Content="C#"
+                                    ToolTipService.ToolTip="{x:Bind PageCodeGitHubLink.NavigateUri, Mode=OneWay}" />
                             </StackPanel>
+                        </Flyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+            </AppBarElementContainer>
 
-                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                    Style="{StaticResource CaptionTextBlockStyle}"
-                                    Text="Sample page source code" />
-                                <FontIcon
-                                    VerticalAlignment="Center"
-                                    FontSize="16"
-                                    Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
-                                    Glyph="&#xE946;"
-                                    ToolTipService.ToolTip="Source code of this sample page in the WinUI Gallery repository" />
-                            </StackPanel>
-                            <HyperlinkButton
-                                x:Name="PageMarkupGitHubLink"
-                                Margin="-12,4,0,0"
-                                ToolTipService.ToolTip="{x:Bind PageMarkupGitHubLink.NavigateUri, Mode=OneWay}">
-                                <TextBlock Text="XAML" />
-                            </HyperlinkButton>
-                            <HyperlinkButton
-                                x:Name="PageCodeGitHubLink"
-                                Margin="-12,0,0,-8"
-                                ToolTipService.ToolTip="{x:Bind PageCodeGitHubLink.NavigateUri, Mode=OneWay}">
-                                <TextBlock Text="C#" />
-                            </HyperlinkButton>
-                        </StackPanel>
-                    </Flyout>
-                </DropDownButton.Flyout>
-            </DropDownButton>
-        </AppBarElementContainer>
+            <AppBarSeparator />
 
-        <AppBarSeparator />
+            <!--  IsCompact="True" doesn't seem to hide the labels  -->
+            <AppBarButton
+                x:Name="ThemeButton"
+                Click="OnThemeButtonClick"
+                IsCompact="True"
+                Label="Toggle theme"
+                LabelPosition="Collapsed"
+                ToolTipService.ToolTip="Toggle theme"
+                Visibility="{x:Bind ThemeButtonVisibility, Mode=OneWay}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE793;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton
+                x:Name="CopyLinkButton"
+                Click="OnCopyLinkButtonClick"
+                Icon="Link"
+                IsCompact="True"
+                Label="Copy link"
+                LabelPosition="Collapsed"
+                ToolTipService.ToolTip="Copy link">
+                <AppBarButton.Resources>
+                    <TeachingTip
+                        x:Name="CopyLinkButtonTeachingTip"
+                        Title="Quickly reference this sample!"
+                        ActionButtonClick="OnCopyDontShowAgainButtonClick"
+                        ActionButtonContent="Don't show again"
+                        CloseButtonContent="Got it!"
+                        FontFamily="{StaticResource ContentControlThemeFontFamily}"
+                        PreferredPlacement="Bottom"
+                        Subtitle="Share with others or paste this link into the Run dialog to open the app to this page directly."
+                        Target="{x:Bind CopyLinkButton}">
+                        <TeachingTip.HeroContent>
+                            <Image AutomationProperties.Name="Image of copied text in Run Dialog." Source="/Assets/CopyLinkTeachingTip.png" />
+                        </TeachingTip.HeroContent>
+                    </TeachingTip>
+                </AppBarButton.Resources>
+            </AppBarButton>
+            <AppBarButton
+                Click="OnFeedBackButtonClick"
+                IsCompact="True"
+                Label="Feedback"
+                LabelPosition="Collapsed"
+                ToolTipService.ToolTip="Send feedback">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xED15;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
 
-        <!--  IsCompact="True" doesn't seem to hide the labels  -->
-        <AppBarButton
-            x:Name="ThemeButton"
-            Click="OnThemeButtonClick"
-            IsCompact="True"
-            Label="Toggle theme"
-            LabelPosition="Collapsed"
-            ToolTipService.ToolTip="Toggle theme"
-            Visibility="{x:Bind ThemeButtonVisibility, Mode=OneWay}">
-            <AppBarButton.Icon>
-                <FontIcon Glyph="&#xE793;" />
-            </AppBarButton.Icon>
-        </AppBarButton>
-        <AppBarButton
-            x:Name="CopyLinkButton"
-            Click="OnCopyLinkButtonClick"
-            Icon="Link"
-            IsCompact="True"
-            Label="Copy link"
-            LabelPosition="Collapsed"
-            ToolTipService.ToolTip="Copy link">
-            <AppBarButton.Resources>
-                <TeachingTip
-                    x:Name="CopyLinkButtonTeachingTip"
-                    Title="Quickly reference this sample!"
-                    ActionButtonClick="OnCopyDontShowAgainButtonClick"
-                    ActionButtonContent="Don't show again"
-                    CloseButtonContent="Got it!"
-                    FontFamily="{StaticResource ContentControlThemeFontFamily}"
-                    PreferredPlacement="Bottom"
-                    Subtitle="Share with others or paste this link into the Run dialog to open the app to this page directly."
-                    Target="{x:Bind CopyLinkButton}">
-                    <TeachingTip.HeroContent>
-                        <Image AutomationProperties.Name="Image of copied text in Run Dialog." Source="/Assets/CopyLinkTeachingTip.png" />
-                    </TeachingTip.HeroContent>
-                </TeachingTip>
-            </AppBarButton.Resources>
-        </AppBarButton>
-        <AppBarButton
-            Click="OnFeedBackButtonClick"
-            IsCompact="True"
-            Label="Feedback"
-            LabelPosition="Collapsed"
-            ToolTipService.ToolTip="Send feedback">
-            <AppBarButton.Icon>
-                <FontIcon Glyph="&#xED15;" />
-            </AppBarButton.Icon>
-        </AppBarButton>
-    </CommandBar>
+        <TextBlock
+            x:Name="TitleTextBlock"
+            Margin="36,0"
+            AutomationProperties.AutomationId="PageHeader"
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="{x:Bind Item.Title}"
+            TextTrimming="CharacterEllipsis"
+            TextWrapping="NoWrap" />
+        <TextBlock
+            x:Name="NamespaceTextBlock"
+            Margin="36,0"
+            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+            IsTextSelectionEnabled="True"
+            Style="{StaticResource CaptionTextBlockStyle}"
+            Text="{x:Bind Item.ApiNamespace}"
+            Visibility="{x:Bind Item.ApiNamespace, Converter={StaticResource emptyStringToVisibilityConverter}}" />
+    </StackPanel>
+
     <VisualStateManager.VisualStateGroups>
         <VisualStateGroup x:Name="LayoutVisualStates">
             <VisualState x:Name="WideLayout">
@@ -224,7 +219,8 @@
                     <AdaptiveTrigger MinWindowWidth="0" />
                 </VisualState.StateTriggers>
                 <VisualState.Setters>
-                    <Setter Target="TitleAndNameSpace.Margin" Value="12,12,12,0" />
+                    <Setter Target="TitleTextBlock.Margin" Value="12,0" />
+                    <Setter Target="NamespaceTextBlock.Margin" Value="12,0" />
                 </VisualState.Setters>
             </VisualState>
         </VisualStateGroup>
