@@ -22,10 +22,12 @@
             Background="{x:Bind Background, Mode=OneWay}"
             RowSpacing="6">
             <Grid.RowDefinitions>
+                <!--  ColorName, ShowWarning  -->
                 <RowDefinition Height="Auto" />
+                <!--  ColorExplanation  -->
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" MinHeight="30" />
-                <RowDefinition Height="Auto" />
+                <!--  ColorBrushName, CopyBrushNameButton  -->
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -33,31 +35,26 @@
                 <ColumnDefinition Width="30" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+
             <TextBlock
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Center"
                 Foreground="{x:Bind Foreground, Mode=OneWay}"
                 IsTextSelectionEnabled="True"
                 Style="{ThemeResource BodyStrongTextBlockStyle}"
                 Text="{x:Bind ColorName, Mode=OneWay}"
                 TextWrapping="WrapWholeWords" />
 
-            <localControls:CopyButton
-                x:Name="CopyBrushNameButton"
-                AutomationProperties.Name="Copy brush name"
-                Grid.RowSpan="4"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Click="CopyBrushNameButton_Click"
-                Content="&#xE8C8;"
-                Foreground="{x:Bind Foreground, Mode=OneWay}"
-                ToolTipService.ToolTip="Copy brush name"/>
+            <FontIcon
+                Grid.Column="2"
+                FontSize="16"
+                Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                Glyph="&#xE7BA;"
+                ToolTipService.ToolTip="This brush might not (yet) be available in WinUI."
+                Visibility="{x:Bind ShowWarning, Mode=OneWay}" />
 
             <TextBlock
                 Grid.Row="1"
-                Margin="0,-4,0,0"
                 IsTextSelectionEnabled="True"
                 Style="{StaticResource CaptionTextBlockStyle}"
                 Text="{x:Bind ColorExplanation, Mode=OneWay}"
@@ -66,22 +63,24 @@
             <TextBlock
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
+                VerticalAlignment="Center"
                 IsTextSelectionEnabled="True"
                 Style="{StaticResource CaptionTextBlockStyle}"
                 Text="{x:Bind ColorBrushName, Mode=OneWay}"
                 TextWrapping="Wrap" />
-            <Grid
+
+            <localControls:CopyButton
+                x:Name="CopyBrushNameButton"
                 Grid.Row="3"
                 Grid.Column="2"
-                Margin="0,0,4,0"
+                AutomationProperties.Name="Copy brush name"
                 Background="Transparent"
-                ToolTipService.ToolTip="This brush might not (yet) be available in WinUI."
-                Visibility="{x:Bind ShowWarning, Mode=OneWay}">
-                <FontIcon
-                    FontSize="16"
-                    Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                    Glyph="&#xE7BA;" />
-            </Grid>
+                BorderBrush="Transparent"
+                BorderThickness="0"
+                Click="CopyBrushNameButton_Click"
+                Content="&#xE8C8;"
+                Foreground="{x:Bind Foreground, Mode=OneWay}"
+                ToolTipService.ToolTip="Copy brush name" />
             <!--  Right now, we don't want to display colors. If we ever want to show them again, we can show them again by using the following code.  -->
             <!--<TextBlock Text="{x:Bind ColorValue, Mode=OneWay}" Grid.Row="4" Grid.ColumnSpan="2" TextWrapping="WrapWholeWords" Style="{StaticResource CaptionTextBlockStyle}"/>-->
         </Grid>
