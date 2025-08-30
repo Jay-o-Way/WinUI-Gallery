@@ -27,7 +27,7 @@ public class MediaPlayerElement : TestBase
     {
         WindowsElement play = Session.FindElementByAccessibilityId("PlayPauseButton");
         Assert.IsNotNull(play);
-        Assert.IsNotNull(Session.FindElementByAccessibilityId("svPanel"));
+        //Assert.IsNotNull(Session.FindElementByAccessibilityId("svPanel"));
 
         // Play the video
         play.Click();

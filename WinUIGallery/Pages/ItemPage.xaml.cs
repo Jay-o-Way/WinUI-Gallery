@@ -72,11 +72,11 @@ public sealed partial class ItemPage : Page
                 }
                 App.MainWindow.EnsureNavigationSelection(item?.UniqueId);
 
-                if (contentFrame.Content is Page loadedPage && PageScrollBehaviorHelper.GetSuppressHostScrolling(loadedPage))
-                {
-                    // Disabling page scrolling, as the page itself will have ScrollViewers to handle specific scrolling use cases
-                    svPanel.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-                }
+                //if (contentFrame.Content is Page loadedPage && PageScrollBehaviorHelper.GetSuppressHostScrolling(loadedPage))
+                //{
+                //    // Disabling page scrolling, as the page itself will have ScrollViewers to handle specific scrolling use cases
+                //    svPanel.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+                //}
             }
         }
         base.OnNavigatedTo(e);

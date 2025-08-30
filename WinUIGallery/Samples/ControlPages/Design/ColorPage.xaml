@@ -24,11 +24,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="The brushes below are part of WinUI 3 and you can reference them in your app. For example:" />
+        <TextBlock
+            Margin="36,0,36,8" Text="The brushes below are part of WinUI 3 and you can reference them in your app. For example:" />
+
         <controls:SampleCodePresenter
             x:Name="XamlPresenter"
             Grid.Row="1"
-            Margin="0,16,0,16"
+            Margin="36,0"
             VerticalContentAlignment="Center"
             SampleType="XAML">
             <controls:SampleCodePresenter.Code>
@@ -37,10 +39,13 @@
                 </x:String>
             </controls:SampleCodePresenter.Code>
         </controls:SampleCodePresenter>
+
         <SelectorBar
             x:Name="PageSelector"
             Grid.Row="2"
-            Margin="-12,0,0,0"
+            Margin="36,0"
+            BorderBrush="Cyan" BorderThickness="1"
+            Background="AliceBlue"
             AutomationProperties.Name="PageSelector"
             Loaded="PageSelector_Loaded"
             SelectionChanged="PageSelector_SelectionChanged">
@@ -51,8 +56,7 @@
             <SelectorBarItem Text="Signal" />
             <SelectorBarItem Text="High Contrast" />
         </SelectorBar>
-        <ScrollViewer Grid.Row="3">
-            <Frame x:Name="NavigationFrame" VerticalAlignment="Stretch" />
-        </ScrollViewer>
+
+        <Frame x:Name="NavigationFrame" Grid.Row="3" />
     </Grid>
 </Page>

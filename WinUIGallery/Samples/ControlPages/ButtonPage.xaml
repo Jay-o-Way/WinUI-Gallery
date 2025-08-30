@@ -17,62 +17,67 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <StackPanel>
-        <controls:ControlExample x:Name="Example1" HeaderText="A simple Button with text content.">
-            <controls:ControlExample.Example>
-                <Button
-                    x:Name="Button1"
-                    AutomationProperties.Name="Standard XAML"
-                    Click="Button_Click"
-                    Content="Standard XAML button"
-                    IsEnabled="{x:Bind DisableButton1.IsChecked.Value.Equals(x:False), Mode=OneWay}" />
-            </controls:ControlExample.Example>
-            <controls:ControlExample.Output>
-                <TextBlock x:Name="Control1Output" FontFamily="Global User Interface" />
-            </controls:ControlExample.Output>
-            <controls:ControlExample.Options>
-                <StackPanel>
-                    <CheckBox x:Name="DisableButton1" Content="Disable button" />
-                </StackPanel>
-            </controls:ControlExample.Options>
-            <controls:ControlExample.Xaml>
-                <x:String>
-                    &lt;Button Content="Standard XAML button" Click="Button_Click" $(IsEnabled)/&gt;
-                </x:String>
-            </controls:ControlExample.Xaml>
-            <controls:ControlExample.Substitutions>
-                <controls:ControlExampleSubstitution
-                    Key="IsEnabled"
-                    IsEnabled="{x:Bind DisableButton1.IsChecked.Value, Mode=OneWay}"
-                    Value="IsEnabled=&quot;False&quot; " />
-            </controls:ControlExample.Substitutions>
-        </controls:ControlExample>
+    <ScrollViewer>
 
-        <controls:ControlExample x:Name="Example2" HeaderText="A Button with graphical content.">
-            <controls:ControlExample.Example>
-                <StackPanel Orientation="Horizontal">
+        <!--
+            use a "thickness" for this margin, not a style, so that you can re-use this on other pages with other controls, e.g. the Grid on IconographyPage
+        -->
+        <StackPanel Margin="{StaticResource ContentPageBaseMargin}">
+            <controls:ControlExample x:Name="Example1" HeaderText="A simple Button with text content.">
+                <controls:ControlExample.Example>
                     <Button
-                        x:Name="Button2"
-                        Width="50"
-                        Height="50"
-                        AutomationProperties.Name="Pie"
-                        Click="Button_Click">
-                        <Image AutomationProperties.Name="Slice" Source="/Assets/SampleMedia/Slices.png" />
-                    </Button>
-                </StackPanel>
-            </controls:ControlExample.Example>
-            <controls:ControlExample.Output>
-                <TextBlock x:Name="Control2Output" />
-            </controls:ControlExample.Output>
-            <controls:ControlExample.Xaml>
-                <x:String xml:space="preserve">
+                        x:Name="Button1"
+                        AutomationProperties.Name="Standard XAML"
+                        Click="Button_Click"
+                        Content="Standard XAML button"
+                        IsEnabled="{x:Bind DisableButton1.IsChecked.Value.Equals(x:False), Mode=OneWay}" />
+                </controls:ControlExample.Example>
+                <controls:ControlExample.Output>
+                    <TextBlock x:Name="Control1Output" FontFamily="Global User Interface" />
+                </controls:ControlExample.Output>
+                <controls:ControlExample.Options>
+                    <StackPanel>
+                        <CheckBox x:Name="DisableButton1" Content="Disable button" />
+                    </StackPanel>
+                </controls:ControlExample.Options>
+                <controls:ControlExample.Xaml>
+                    <x:String>
+                        &lt;Button Content="Standard XAML button" Click="Button_Click" $(IsEnabled)/&gt;
+                    </x:String>
+                </controls:ControlExample.Xaml>
+                <controls:ControlExample.Substitutions>
+                    <controls:ControlExampleSubstitution
+                        Key="IsEnabled"
+                        IsEnabled="{x:Bind DisableButton1.IsChecked.Value, Mode=OneWay}"
+                        Value="IsEnabled=&quot;False&quot; " />
+                </controls:ControlExample.Substitutions>
+            </controls:ControlExample>
+
+            <controls:ControlExample x:Name="Example2" HeaderText="A Button with graphical content.">
+                <controls:ControlExample.Example>
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            x:Name="Button2"
+                            Width="50"
+                            Height="50"
+                            AutomationProperties.Name="Pie"
+                            Click="Button_Click">
+                            <Image AutomationProperties.Name="Slice" Source="/Assets/SampleMedia/Slices.png" />
+                        </Button>
+                    </StackPanel>
+                </controls:ControlExample.Example>
+                <controls:ControlExample.Output>
+                    <TextBlock x:Name="Control2Output" />
+                </controls:ControlExample.Output>
+                <controls:ControlExample.Xaml>
+                    <x:String xml:space="preserve">
 &lt;Button Content="Button" Click="Button_Click" AutomationProperties.Name="Pie"&gt;
     &lt;Image Source="/Assets/SampleMedia/Slices.png" AutomationProperties.Name="Slice"/&gt;
 &lt;/Button&gt;
                 </x:String>
-            </controls:ControlExample.Xaml>
-        </controls:ControlExample>
-        <!--controls:ControlExample HeaderText="Reveal style applied to Button.">
+                </controls:ControlExample.Xaml>
+            </controls:ControlExample>
+            <!--controls:ControlExample HeaderText="Reveal style applied to Button.">
             <controls:ControlExample.Example>
                 <Button Style="{StaticResource ButtonRevealStyle}" Content="Reveal style button"/>
             </controls:ControlExample.Example>
@@ -82,31 +87,31 @@
                 </x:String>
             </controls:ControlExample.Xaml>
         </-->
-        <controls:ControlExample HeaderText="Wrapping Buttons with large content">
-            <StackPanel>
-                <TextBlock
-                    Margin="0,0,0,8"
-                    Text="The following buttons' content may get clipped if we don't pay careful attention to their layout containers."
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    Margin="0,0,0,8"
-                    Text="One option to mitigate clipped content is to place Buttons underneath each other, allowing for more space to grow horizontally:"
-                    TextWrapping="Wrap" />
-                <Button Margin="0,0,0,5" HorizontalAlignment="Stretch">This is some text that is too long and will get cut off</Button>
-                <Button HorizontalAlignment="Stretch">This is another text that would result in being cut off</Button>
+            <controls:ControlExample HeaderText="Wrapping Buttons with large content">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,8"
+                        Text="The following buttons' content may get clipped if we don't pay careful attention to their layout containers."
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Margin="0,0,0,8"
+                        Text="One option to mitigate clipped content is to place Buttons underneath each other, allowing for more space to grow horizontally:"
+                        TextWrapping="Wrap" />
+                    <Button Margin="0,0,0,5" HorizontalAlignment="Stretch">This is some text that is too long and will get cut off</Button>
+                    <Button HorizontalAlignment="Stretch">This is another text that would result in being cut off</Button>
 
-                <TextBlock Margin="0,8,0,8" Text="Another option is to explicitly wrap the Button's content" />
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button MaxWidth="240" Margin="0,0,8,0">
-                        <TextBlock Text="This is some text that is too long and will get cut off without wrapping" TextWrapping="WrapWholeWords" />
-                    </Button>
-                    <Button MaxWidth="240">
-                        <TextBlock Text="This is another text that would result in being cut off without wrapping" TextWrapping="WrapWholeWords" />
-                    </Button>
+                    <TextBlock Margin="0,8,0,8" Text="Another option is to explicitly wrap the Button's content" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button MaxWidth="240" Margin="0,0,8,0">
+                            <TextBlock Text="This is some text that is too long and will get cut off without wrapping" TextWrapping="WrapWholeWords" />
+                        </Button>
+                        <Button MaxWidth="240">
+                            <TextBlock Text="This is another text that would result in being cut off without wrapping" TextWrapping="WrapWholeWords" />
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <controls:ControlExample.Xaml>
-                <x:String xml:space="preserve">
+                <controls:ControlExample.Xaml>
+                    <x:String xml:space="preserve">
 &lt;StackPanel&gt;
     &lt;TextBlock Text="The following buttons' content may get clipped if we don't pay careful attention to their layout containers." Margin="0,0,0,8" TextWrapping="Wrap"/&gt;
     &lt;TextBlock Text="One option to mitigate clipped content is to place Buttons underneath each other, allowing for more space to grow horizontally:" Margin="0,0,0,8" TextWrapping="Wrap"/&gt;
@@ -124,22 +129,23 @@
     &lt;/StackPanel&gt;
 &lt;/StackPanel&gt;
                 </x:String>
-            </controls:ControlExample.Xaml>
-        </controls:ControlExample>
+                </controls:ControlExample.Xaml>
+            </controls:ControlExample>
 
-        <controls:ControlExample HeaderText="Accent style applied to Button.">
-            <controls:ControlExample.Example>
-                <Button
-                    AutomationProperties.Name="Accent style"
-                    Content="Accent style button"
-                    Style="{StaticResource AccentButtonStyle}" />
-            </controls:ControlExample.Example>
-            <controls:ControlExample.Xaml>
-                <x:String>
-                    &lt;Button Style="{StaticResource AccentButtonStyle}" Content="Accent style button" /&gt;
-                </x:String>
-            </controls:ControlExample.Xaml>
-        </controls:ControlExample>
+            <controls:ControlExample HeaderText="Accent style applied to Button.">
+                <controls:ControlExample.Example>
+                    <Button
+                        AutomationProperties.Name="Accent style"
+                        Content="Accent style button"
+                        Style="{StaticResource AccentButtonStyle}" />
+                </controls:ControlExample.Example>
+                <controls:ControlExample.Xaml>
+                    <x:String>
+                        &lt;Button Style="{StaticResource AccentButtonStyle}" Content="Accent style button" /&gt;
+                    </x:String>
+                </controls:ControlExample.Xaml>
+            </controls:ControlExample>
 
-    </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

@@ -19,8 +19,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="using:WinUIGallery.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls" 
     xmlns:models="using:WinUIGallery.Models"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
     helpers:PageScrollBehaviorHelper.SuppressHostScrolling="True"
     mc:Ignorable="d">
 
@@ -90,25 +90,26 @@
             NotEmptyValue="False" />
     </Page.Resources>
 
-    <Grid RowSpacing="8">
+    <!--
+        use a "thickness" for this margin, not a style, so that you can re-use this on other pages with other controls (often a StackPanel)
+    -->
+    <Grid Margin="{StaticResource ContentPageBaseMargin}" RowSpacing="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <AutoSuggestBox
             x:Name="IconsAutoSuggestBox"
             MinWidth="304"
             MaxWidth="320"
+            Margin="0,16,0,0"
             HorizontalAlignment="Left"
             PlaceholderText="Search icons by name, code, or tags"
             QueryIcon="Find"
-            Margin="0,16,0,0"
             TextChanged="SearchTextBox_TextChanged" />
 
-        <controls:SampleThemeListener
-            Grid.Row="1"
-            IsTabStop="True">
+        <controls:SampleThemeListener Grid.Row="1" IsTabStop="True">
             <Grid Style="{ThemeResource GalleryTileGridStyle}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -135,47 +136,51 @@
                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
                     BorderThickness="1,0,0,0"
-                    DataContext="{x:Bind}"
                     CornerRadius="0,8,8,0"
+                    DataContext="{x:Bind}"
                     Visibility="Collapsed">
                     <ScrollViewer>
                         <StackPanel Margin="16,16,8,16" Spacing="2">
-                            <Grid Margin="0,0,0,24"
-                                  HorizontalAlignment="Stretch">
+                            <Grid Margin="0,0,0,24" HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Border Margin="0,0,8,0"
-                                        Padding="8"
-                                        HorizontalAlignment="Left"
-                                        Background="{ThemeResource ControlFillColorDefaultBrush}"
-                                        BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="{StaticResource ControlCornerRadius}">
-                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
-                                              FontSize="48"
-                                              Glyph="{x:Bind SelectedItem.Character, Mode=OneWay}" />
+                                <Border
+                                    Margin="0,0,8,0"
+                                    Padding="8"
+                                    HorizontalAlignment="Left"
+                                    Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{StaticResource ControlCornerRadius}">
+                                    <FontIcon
+                                        FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                        FontSize="48"
+                                        Glyph="{x:Bind SelectedItem.Character, Mode=OneWay}" />
                                 </Border>
-                                <Grid Grid.Column="1"
-                                      HorizontalAlignment="Stretch"
-                                      Visibility="{x:Bind SelectedItem.IsSegoeFluentOnly, Mode=OneWay}"
-                                      ToolTipService.ToolTip="This icon is only available in Segoe Fluent Icons (the default icon font on Windows 11). On Windows 10, Segoe MDL2 Assets is used by default, so the icon may not appear unless Segoe Fluent Icons is installed.">
+                                <Grid
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    ToolTipService.ToolTip="This icon is only available in Segoe Fluent Icons (the default icon font on Windows 11). On Windows 10, Segoe MDL2 Assets is used by default, so the icon may not appear unless Segoe Fluent Icons is installed."
+                                    Visibility="{x:Bind SelectedItem.IsSegoeFluentOnly, Mode=OneWay}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon FontSize="16"
-                                              Margin="0,6,8,0"
-                                              Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                              Glyph="&#xE7BA;"
-                                              VerticalAlignment="Top" />
-                                    <TextBlock Grid.Column="1"
-                                               Margin="0,0,8,0"
-                                               Text="Only supported in Segoe Fluent Icons"
-                                               TextWrapping="Wrap"
-                                               Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                               VerticalAlignment="Top" />
+                                    <FontIcon
+                                        Margin="0,6,8,0"
+                                        VerticalAlignment="Top"
+                                        FontSize="16"
+                                        Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                        Glyph="&#xE7BA;" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Margin="0,0,8,0"
+                                        VerticalAlignment="Top"
+                                        Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                        Text="Only supported in Segoe Fluent Icons"
+                                        TextWrapping="Wrap" />
                                 </Grid>
                             </Grid>
                             <TextBlock
@@ -207,13 +212,13 @@
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                 Style="{StaticResource CaptionTextBlockStyle}"
                                 Text="SymbolIcon XAML"
-                                Visibility="{x:Bind SelectedItem.SymbolName, Converter={StaticResource nullToVisibilityConverter}, Mode=OneWay}"/>
+                                Visibility="{x:Bind SelectedItem.SymbolName, Converter={StaticResource nullToVisibilityConverter}, Mode=OneWay}" />
                             <controls:SampleCodePresenter x:Name="XAMLCodePresenterSymbol" Style="{StaticResource CodeValuePresenterStyle}" />
                             <TextBlock
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                 Style="{StaticResource CaptionTextBlockStyle}"
                                 Text="SymbolIcon C#"
-                                Visibility="{x:Bind SelectedItem.SymbolName, Converter={StaticResource nullToVisibilityConverter}, Mode=OneWay}"/>
+                                Visibility="{x:Bind SelectedItem.SymbolName, Converter={StaticResource nullToVisibilityConverter}, Mode=OneWay}" />
                             <controls:SampleCodePresenter x:Name="CSharpCodePresenterSymbol" Style="{StaticResource CodeValuePresenterStyle}" />
                             <TextBlock
                                 x:Name="TagsLabel"
